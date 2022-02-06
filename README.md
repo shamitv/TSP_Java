@@ -7,7 +7,9 @@ Entrypoint for the implmentation is class "Traverse" in package "in.shamit.learn
 
 ## Approach
 
-This is a naive implementation 
+This is a naive implementation that tries to evaluate all possible paths.  https://github.com/shamitv/TSP_Java/blob/6aeb5c78f0f3c31054ae162f68bef94bfb0b08aa/src/in/shamit/learn/tsp/Traverse.java#L15 
+
+This amounts to evluation of 350 Trillion possible paths for 17 fully-connecteed vertices. 
 
 ## Dataset 
 
