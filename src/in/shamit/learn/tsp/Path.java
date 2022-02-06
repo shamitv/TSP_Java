@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Path {
     Path parentPath = null;
-    Set<Vertex> vertices = new HashSet<>();
+
     Edge edge = null;
 
     public Path() {
@@ -15,18 +15,35 @@ public class Path {
 
     public Path(Path parentPath) {
         this.parentPath = parentPath;
-        if (parentPath != null) {
-            vertices.addAll(parentPath.getVertices());
-        }
     }
 
 
-    public boolean doesIncludeVertex(Vertex v) {
-        return vertices.contains(v);
+    public boolean canIncludeVertexAsDestination(Vertex v) {
+        if(edge != null){
+            if(v.id == edge.destination.id){
+                return false;
+            }else{
+                if(parentPath!=null){
+                    return parentPath.canIncludeVertexAsDestination(v);
+                }else{
+                    //This is top-most parent. Its origin can't be added as destination
+                    if(v.id == edge.origin.id){
+                        return false;
+                    }
+                }
+            }
+        }else{
+            if(parentPath!=null){
+                return parentPath.canIncludeVertexAsDestination(v);
+            }
+        }
+        return true;
     }
 
     public boolean canAddEdge(Edge e) {
-        return !vertices.contains(e.getDestination());
+        Vertex destination = e.getDestination();
+        boolean canInclude = canIncludeVertexAsDestination(e.getDestination());
+        return canInclude;
     }
 
 
@@ -44,8 +61,6 @@ public class Path {
     public void setEdge(Edge e) {
         if (edge == null) {
             edge = e;
-            vertices.add(e.getOrigin());
-            vertices.add(e.getDestination());
         } else {
             throw new RuntimeException("Edge is Read only. Can't be modified once set");
         }
@@ -122,14 +137,23 @@ public class Path {
         }
     }
 
-    public Set<Vertex> getVertices() {
-        return vertices;
-    }
-
     @Override
     public String toString() {
         return "Path{" +
                 "edges=" + getEdgesAsString() +
                 '}';
+    }
+
+    public int getVerticesCount() {
+        int count=0;
+        if(edge!=null){
+            count ++;
+        }
+        Path curPath = this;
+        while(curPath!=null){
+            count++;
+            curPath = curPath.parentPath;
+        }
+        return count;
     }
 }

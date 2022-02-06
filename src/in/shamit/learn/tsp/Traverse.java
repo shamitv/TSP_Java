@@ -17,7 +17,7 @@ public class Traverse {
         Vertex start = g.getFirstVertex();
         Vertex lastVertex = (p == null) ? start : p.getLastVertex();
 
-        g.vertices.keySet().stream().parallel().forEach(v_id -> {
+        g.vertices.keySet().stream().forEach(v_id -> {
             Vertex v = g.vertices.get(v_id);
 
             if (!v.equals(lastVertex)) {
@@ -62,17 +62,7 @@ public class Traverse {
         prevInstant = cur;
     }
 
-    boolean isPathComplete(Graph g, Path p, Vertex nextVertex) {
-        boolean complete = false;
-        Vertex fist = g.getFirstVertex();
-        if (nextVertex.equals(fist)) {
-            int verticesInGraph = g.vertices.size();
-            if (p.getVertices().size() == verticesInGraph - 1) {
-                complete = true;
-            }
-        }
-        return complete;
-    }
+
 
     boolean isPathComplete(Graph g, Path p) {
         boolean complete = false;
@@ -80,8 +70,9 @@ public class Traverse {
         Vertex last = p.getLastVertex();
         if (last.equals(fist)) {
             int verticesInGraph = g.vertices.size();
-            int verticesInPath = p.getVertices().size();
-            if (verticesInPath == verticesInGraph) {
+            int verticesInPath = p.getVerticesCount();
+            if ((verticesInPath -1) == verticesInGraph) {
+                //Complete path will include origin twice (stat and completes at origin
                 complete = true;
             }
         }
