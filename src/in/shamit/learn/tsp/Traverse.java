@@ -33,12 +33,12 @@ public class Traverse {
                     Path childPath = new Path(finalP);
                     Edge e = lv.getEdgeToVertex(v);
                     if(childPath.canAddEdge(e)){
-                        childPath.addEdge(e);
+                        childPath.setEdge(e);
                         DoTraverse(g,childPath);
                     }else{
                         if(start.equals(v)){
                             if(isPathComplete(g,childPath,v)){
-                                childPath.addEdge(e);
+                                childPath.setEdge(e);
                                 evaluatePath(childPath);
                             }
                         }

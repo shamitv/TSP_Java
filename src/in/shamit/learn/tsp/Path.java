@@ -13,12 +13,10 @@ public class Path {
         this.parentPath = parentPath;
     }
 
-    List<Edge> edges = new ArrayList<>();
+    Edge edge = null;
     public boolean doesIncludeVertex(Vertex v){
-        for(var e:edges){
-            if(e.getDestination().equals(v) ){
-                return true;
-            }
+        if(edge != null && edge.getDestination().equals(v) ){
+            return true;
         }
         if(parentPath != null){
             return parentPath.doesIncludeVertex(v);
@@ -27,10 +25,9 @@ public class Path {
     }
 
     public boolean canAddEdge(Edge e){
-        for(var e1:edges){
-            if(e.getDestination().equals(e1.getDestination()) || e.getDestination().equals(e1.getOrigin())){
-                return false;
-            }
+        if( edge != null &&
+                (e.getDestination().equals(edge.getDestination()) || e.getDestination().equals(edge.getOrigin()))){
+            return false;
         }
         if(parentPath != null){
             return parentPath.canAddEdge(e);
@@ -38,21 +35,11 @@ public class Path {
         return true;
     }
 
-    boolean doesTerminateAt(Vertex v){
-        if(edges.size()==0){
-            if(parentPath != null){
-                return  parentPath.doesTerminateAt(v);
-            }
-            return false;
-        }else{
-            return edges.get(edges.size()-1).equals(v);
-        }
-    }
 
     public int getCost(){
         int cost = 0;
-        for(var e:edges){
-            cost += e.getWeight();
+        if(edge !=null){
+            cost += edge.getWeight();
         }
         if(parentPath != null){
             cost += parentPath.getCost();
@@ -60,25 +47,27 @@ public class Path {
         return cost;
     }
 
-    public void addEdge(Edge e){
-        edges.add(e);
+    public void setEdge(Edge e){
+        edge = e;
     }
 
 
     public Vertex getLastVertex() {
-        if(edges.size()==0){
+        if(edge==null){
             if(parentPath != null){
                 return parentPath.getLastVertex();
             }
             return null;
         }else{
-            Edge e = edges.get(edges.size()-1);
-            return e.getDestination();
+            return edge.getDestination();
         }
     }
 
     public int edgeCount() {
-        int count = edges.size();
+        int count = 0;
+        if(edge !=null){
+            count++;
+        }
         if(parentPath!=null){
             count +=parentPath.edgeCount();
         }
@@ -114,8 +103,8 @@ public class Path {
 
     String getEdgesAsStringExcludeParent(){
         StringBuilder ret = new StringBuilder();
-        for(var e:edges){
-            ret.append(e + " ");
+        if(edge!=null){
+            ret.append(edge + " ");
         }
         return ret.toString();
     }
