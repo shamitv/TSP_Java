@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="br17.xml">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/data/br17.xml.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

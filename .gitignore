@@ -22,4 +22,5 @@
 #Build directory
 /out/
 
-
+#MacOS stuff
+**/.DS_Store
