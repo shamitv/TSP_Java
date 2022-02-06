@@ -18,7 +18,9 @@ Dataset link is : http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/atsp/br1
 This code does not have any dependency beyond a JDK. Open code in any IDE, complie and run.
 
 ##Current status 
-Code finds 100 Million complete paths every 41 seconds 
+  
+Code finds **100 Million** complete paths every **41 seconds**
+
 
 022-02-06 19:05:23 INFO in.shamit.learn.tsp.Traverse evaluatePath New Path, Cost = 50
 2022-02-06 19:05:23 INFO in.shamit.learn.tsp.Traverse evaluatePath New Path, Cost = 49
