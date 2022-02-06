@@ -2,6 +2,8 @@ package in.shamit.learn.tsp;
 
 import in.shamit.learn.tsp.io.GraphReader;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,8 +57,16 @@ public class Traverse {
             System.out.println(p.getCost() + " " + p);
         }
         if(curCount % 1000_000_00 == 0){
-            log.info(curCount + "");
+            logProgress(curCount,p);
         }
+    }
+
+    Instant prevInstant = Instant.now();
+    private void logProgress(long curCount, Path p) {
+        Instant cur = Instant.now();
+        String timeElapsed = Duration.between(prevInstant,cur).toSeconds() + " Seconds | ";
+        log.info(curCount + " Time Elapsed " + timeElapsed + " Current Cost + Path  | " + p.getCost() + " | " +p);
+        prevInstant = cur;
     }
 
     boolean isPathComplete(Graph g, Path p,Vertex nextVertex){
