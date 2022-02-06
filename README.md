@@ -5,6 +5,10 @@ Entrypoint for the implmentation is class "Traverse" in package "in.shamit.learn
 
 ![Representation of TSP](./doc/tsp_example.png)
 
+## Approach
+
+This is a naive implementation 
+
 ## Dataset 
 
 Data is from TSPLIB (http://comopt.ifi.uni-heidelberg.de/software/TSPLIB95/)
