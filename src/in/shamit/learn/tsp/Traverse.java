@@ -17,7 +17,7 @@ public class Traverse {
         Vertex start = g.getFirstVertex();
         Vertex lastVertex = (p == null) ? start : p.getLastVertex();
 
-        g.vertices.keySet().stream().forEach(v_id -> {
+        g.vertices.keySet().parallelStream().forEach(v_id -> {
             Vertex v = g.vertices.get(v_id);
 
             if (!v.equals(lastVertex)) {
