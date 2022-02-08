@@ -13,8 +13,8 @@ public class Edge {
 
     @Override
     public String toString() {
-        return  "(" + origin.getId() + ")>"  +"=="+ weight +"==>" +
-                "(" + destination.getId()   + ")" ;
+        return  "" + origin.getId() + ">"  +"-"+ weight +"->" +
+                "" + destination.getId()   + "" ;
     }
 
     public Vertex getOrigin() {

@@ -139,8 +139,9 @@ public class Path {
 
     @Override
     public String toString() {
-        return "Path{" +
-                "edges=" + getEdgesAsString() +
+        return "P{" +
+                "c=" +getCost()+
+                " e=" + getEdgesAsString() +
                 '}';
     }
 
