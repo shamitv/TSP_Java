@@ -91,5 +91,7 @@ public class Traverse {
         Traverse t = new Traverse();
         t.DoTraverse(g, null);
         log.info("done");
+        System.out.println("Lowest cost " + t.lowestCostPath.getCost());
+        System.out.println("Path = "+t.lowestCostPath.toString());
     }
 }
