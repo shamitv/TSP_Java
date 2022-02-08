@@ -81,7 +81,7 @@ public class Traverse {
 
     public static void main(String[] args) {
         System.setProperty("java.util.logging.SimpleFormatter.format",
-                "%1$tF %1$tT %4$s %2$s %5$s%6$s%n");
+                "[%1$tF %1$tT] [%4$-7s] %5$s %n");
 
         log.setLevel(Level.INFO);
         String filePath = Config.DATA_FILE;
