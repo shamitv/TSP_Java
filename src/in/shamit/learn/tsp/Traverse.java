@@ -57,11 +57,32 @@ public class Traverse {
 
     private void logProgress(long curCount, Path p) {
         Instant cur = Instant.now();
-        String timeElapsed = Duration.between(prevInstant, cur).toSeconds() + " Seconds | ";
-        log.info(curCount + " Time Elapsed " + timeElapsed + " Current Cost + Path  | " + p.getCost() + " | " + p);
+        String timeElapsed = Duration.between(prevInstant, cur).toSeconds() + "|";
+        log.info(formatNumberToBillions(curCount) + "|" + timeElapsed + "C + P |" + p.getCost() + "|" + p);
         prevInstant = cur;
     }
 
+    public String formatNumberToBillions(long number) {
+        long million = 1000000L;
+        long billion = 1000000000L;
+        long trillion = 1000000000000L;
+        if ((number >= million) && (number < billion)) {
+            float fraction = calculateFraction(number, million);
+            return fraction + "M";
+        } else if ((number >= billion) && (number < trillion)) {
+            float fraction = calculateFraction(number, billion);
+            return fraction + "B";
+        }else {
+            float fraction = calculateFraction(number, billion);
+            return fraction + "T";
+        }
+    }
+
+    public float calculateFraction(long number, long divisor) {
+        float truncate = (number * 10L + (divisor / 2L)) / divisor;
+        float fraction = (float) truncate * 0.10F;
+        return fraction;
+    }
 
 
     boolean isPathComplete(Graph g, Path p) {
@@ -81,7 +102,7 @@ public class Traverse {
 
     public static void main(String[] args) {
         System.setProperty("java.util.logging.SimpleFormatter.format",
-                "[%1$tF %1$tT] [%4$-7s] %5$s %n");
+                "[%1$tF %1$tT] [%4$-4s] %5$s %n");
 
         log.setLevel(Level.INFO);
         String filePath = Config.DATA_FILE;
